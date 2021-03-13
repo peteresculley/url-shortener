@@ -1,0 +1,22 @@
+version: '3'
+services:
+  backend:
+    container_name: nodejs
+    restart: always
+    build: ./
+    ports:
+     - "8080:8080"
+    links:
+     - db
+  db:
+    container_name: pg_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: url_shortener
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/

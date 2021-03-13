@@ -1,0 +1,7 @@
+This is run with Docker
+
+1. Run project
+`docker-compose up`
+
+2. Open app
+http://localhost:8080

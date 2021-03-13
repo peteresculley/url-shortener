@@ -1,0 +1,10 @@
+{
+  "include": [ "src" ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "ES5",
+    "module": "CommonJS",
+    "removeComments": true,
+    "esModuleInterop": true
+  }
+}

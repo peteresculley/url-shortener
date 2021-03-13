@@ -13,7 +13,8 @@ const App = () => {
     setInput(event.target.value);
   };
 
-  const requestShorten = async () => {
+  const requestShorten = async (event: React.FormEvent) => {
+    event.preventDefault();
     setResult('');
     setError('');
     setStatus('In progress');
@@ -36,18 +37,30 @@ const App = () => {
     }
   };
 
-  const resultOrError = errorMessage
-    ? <div style={styles.error.container}>{errorMessage}</div>
-    : <div style={styles.result.container}>{resultMessage}</div>;
+  const copyResult = () => {
+    navigator.clipboard.writeText(result);
+  };
+
+  const messageBox = status
+    ? <div style={styles.status}>{status}</div>
+    : errorMessage
+    ? <div style={styles.error}>{errorMessage}</div>
+    : resultMessage
+    ? <div style={styles.result}>
+        <label>{resultMessage}</label>
+        <button onClick={copyResult} style={styles.copyButton}>Copy</button>
+      </div>
+    : null;
 
   return <div style={styles.container}>
     <div style={styles.url.container}>
-      <label style={styles.url.label}>URL:</label>
-      <input onChange={onInputChange} onSubmit={requestShorten} value={input} style={styles.url.input} />
-      <button onClick={requestShorten}>Shorten!</button>
-      <div style={styles.url.status}>{status}</div>
+      <form onSubmit={requestShorten}>
+        <label style={styles.url.label}>URL:</label>
+        <input type="text" onChange={onInputChange} value={input} style={styles.url.input} autoFocus={true} />
+        <button type="submit" disabled={input === ''}>Shorten!</button>
+      </form>
     </div>
-    {resultOrError}
+    {messageBox}
   </div>;
 };
 
@@ -65,24 +78,27 @@ const styles = {
     label: {
       marginRight: 5,
     },
-    input: {},
-    status: {
-      marginLeft: 15,
-      color: 'gray',
+    input: {
+      minWidth: '50vw',
+      marginRight: '0.5rem',
     },
+  },
+  status: {
+    marginTop: '1rem',
+    color: 'gray',
   },
   result: {
-    container: {
-      marginTop: '1rem',
-      marginBottom: '1rem',
-    },
+    marginTop: '1rem',
+    marginBottom: '1rem',
+    flexDirection: 'row',
   },
   error: {
-    container: {
-      marginTop: '1rem',
-      marginBottom: '1rem',
-      color: 'red',
-    },
+    marginTop: '1rem',
+    marginBottom: '1rem',
+    color: 'red',
+  },
+  copyButton: {
+    marginLeft: '0.5rem',
   },
 } as const;
 

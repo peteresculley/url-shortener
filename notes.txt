@@ -1,7 +1,7 @@
-This is run with Docker
+## How to run - Requires Docker
+1. Run `docker-compose up`
+2. Open app - http://localhost:8080
 
-1. Run project
-`docker-compose up`
-
-2. Open app
-http://localhost:8080
+## How to run tests - Requires Node v10 or higher
+1. `yarn install`
+2. `yarn test`

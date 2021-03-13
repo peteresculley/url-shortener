@@ -6,5 +6,5 @@ export const dbConfig = {
   password: 'root',
   database: 'url_shortener',
   port: 5432,
-  host: 'localhost',
+  host: process.env.DATABASE_HOST || 'localhost',
 };

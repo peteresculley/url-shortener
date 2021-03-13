@@ -5,6 +5,7 @@
     "target": "ES5",
     "module": "CommonJS",
     "removeComments": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": [ "jest" ]
   }
 }
